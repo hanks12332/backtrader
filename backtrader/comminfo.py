@@ -354,13 +354,13 @@ class ComminfoFundingRate(CommInfoBase):
         size, price = pos.size, pos.price
         # 计算资金费率的时候，使用下个bar的开盘价会更精准一些，实际上两者差距应该不大。
         try:
-            current_price = data.mark_price_open[1]
+            current_price = data.open[1]
         except IndexError:
-            current_price = data.mark_price_close[0]
+            current_price = data.close[0]
         position_value = size * current_price * self.p.mult
         # 得到当前的资金费率
         try:
-            funding_rate = data.current_funding_rate[1]
+            funding_rate = data.funding_rate[1]
         except IndexError:
             funding_rate = 0.0
         # 如果资金费率为正，则做空的时候会得到资金费率，如果资金费率为负，则做多的时候会得到资金费率
