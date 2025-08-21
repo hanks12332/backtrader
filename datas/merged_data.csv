@@ -1,4 +1,4 @@
-datetime,Open,High,Low,Close,Volume,Close time,Quote asset volume,Number of trades,Taker buy base asset volume,Taker buy quote asset volume,Ignore,Funding rate,openinterest,symbol
+datetime,Open,High,Low,Close,Volume,Close time,Quote asset volume,Number of trades,Taker buy base asset volume,Taker buy quote asset volume,Ignore,Funding_rate,openinterest,symbol
 2024-12-01 00:00:00,96407.99,96672.49,96260.0,96340.6,532.95388,1733014799999,51410648.796134,154693,246.27919,23756467.1020911,0,0.00012063,0,BTCUSDT
 2024-12-01 01:00:00,96340.61,96516.0,96044.21,96106.62,756.83521,1733018399999,72903934.1627258,171501,273.29283,26324707.7217942,0,0.0,0,BTCUSDT
 2024-12-01 02:00:00,96106.62,96518.88,95693.88,95776.22,1892.57481,1733021999999,181924955.1524688,299382,846.69151,81416187.5952797,0,0.0,0,BTCUSDT

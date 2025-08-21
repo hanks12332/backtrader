@@ -331,7 +331,7 @@ class ComminfoFundingRate(CommInfoBase):
     # 实现一个数字货币的资金费率类
     params = (
         ('commission', 0.0), ('mult', 1.0), ('margin', None),
-        ('stocklike', False),
+        ('stocklike', True),
         ('commtype', CommInfoBase.COMM_PERC),
         ('percabs', True)
     )
@@ -352,21 +352,18 @@ class ComminfoFundingRate(CommInfoBase):
         """计算币安合约的资金费率，先暂时使用价格代替标记价格，后续再优化"""
         # 仓位及价格
         size, price = pos.size, pos.price
-        # 计算资金费率的时候，使用下个bar的开盘价会更精准一些，实际上两者差距应该不大。
-        try:
-            current_price = data.open[1]
-        except IndexError:
-            current_price = data.close[0]
+        # 计算资金费率的时候，使用开盘价会更精准一些
+        current_price = data.open[0]
         position_value = size * current_price * self.p.mult
         # 得到当前的资金费率
         try:
-            funding_rate = data.funding_rate[1]
+            funding_rate = data.funding_rate[0]
         except IndexError:
             funding_rate = 0.0
         # 如果资金费率为正，则做空的时候会得到资金费率，如果资金费率为负，则做多的时候会得到资金费率
-        # total_funding_rate = -1 * funding_rate * position_value
+        # total_funding = -1 * funding_rate * position_value
         # 但是broker里面计算的时候是减去这个值，所以需要取相反数
-        total_funding_rate = funding_rate * position_value
-        # if total_funding_rate != 0:
-        #     print(bt.num2date(data.datetime[0]), data._name, "get funding ", total_funding_rate)
-        return total_funding_rate
+        total_funding = funding_rate * position_value
+        # if total_funding != 0:
+        #     print(data.datetime.datetime(0), data._name, "get funding ", total_funding)
+        return total_funding
